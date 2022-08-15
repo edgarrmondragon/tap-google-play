@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "tap-google-play"
 version = "0.0.1"
-description = "`tap-google_play` is a Singer tap for GooglePlay, built with the Meltano SDK for Singer Taps."
-authors = ["Arthur Pasqualotto"]
+description = "`tap-google-play` is a Singer tap for GooglePlay, built with the Meltano SDK for Singer Taps."
+authors = ["hotglue"]
 keywords = [
     "ELT",
     "GooglePlay",
