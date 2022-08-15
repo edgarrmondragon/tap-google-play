@@ -1,10 +1,10 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: "tap-googleplay"
+project_id: "tap-google-play"
 plugins:
   extractors:
-  - name: "tap-googleplay"
-    namespace: "tap_googleplay"
+  - name: "tap-google-play"
+    namespace: "tap_google_play"
     pip_url: -e .
     capabilities:
     - state
