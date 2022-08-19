@@ -36,8 +36,11 @@ class ReviewsStream(GooglePlayStream):
         result = True
 
         start_date = self.get_starting_replication_key_value(context)
-        if start_date: start_date =  datetime.datetime.strptime(
-                                    start_date,'%Y-%m-%dT%H:%M:%S')
+        if start_date: 
+            if start_date.endswith("Z"): 
+                start_date = start_date.strip("Z")
+            start_date =  datetime.datetime.strptime(
+                        start_date,'%Y-%m-%dT%H:%M:%S')
 
         self.logger.info(f"Getting reviews for {app_id}.")
         while result: 
