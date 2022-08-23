@@ -1,11 +1,10 @@
-from tracemalloc import start
 from typing import Any, Dict, Optional, Union, List, Iterable
 
 from singer_sdk import typing as th 
 
 from tap_google_play.client import GooglePlayStream
 
-import datetime
+from pendulum import parse
 
 from google_play_scraper import reviews, Sort
 
@@ -37,10 +36,7 @@ class ReviewsStream(GooglePlayStream):
 
         start_date = self.get_starting_replication_key_value(context)
         if start_date: 
-            if start_date.endswith("Z"): 
-                start_date = start_date.strip("Z")
-            start_date =  datetime.datetime.strptime(
-                        start_date,'%Y-%m-%dT%H:%M:%S')
+            start_date =  parse(start_date)
 
         self.logger.info(f"Getting reviews for {app_id}.")
         while result: 
@@ -52,7 +48,7 @@ class ReviewsStream(GooglePlayStream):
                 
             if start_date:
                 for record in result:
-                    if record.get('at') > start_date: 
+                    if record.get('at') > start_date.replace(tzinfo=None): 
                         results.append(record)
                     else: result = None
             else: 
