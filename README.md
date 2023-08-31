@@ -65,8 +65,6 @@ tap-google-play --config CONFIG --discover > ./catalog.json
 
 ## Developer Resources
 
-- [ ] `Developer TODO:` As a first step, scan the entire project for the text "`TODO:`" and complete any recommended steps, deleting the "TODO" references once completed.
-
 ### Initialize your Development Environment
 
 ```bash
