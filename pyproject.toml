@@ -1,20 +1,17 @@
 [build-system]
 build-backend = "poetry.core.masonry.api"
-requires = [
-  "poetry-core==1.7",
-]
+requires = ["poetry-core==1.7", "poetry-dynamic-versioning"]
 
 [tool.poetry]
 name = "tap-google-play"
-version = "0.0.1"
+version = "0.0.1a1"
 description = "`tap-google-play` is a Singer tap for GooglePlay, built with the Meltano SDK for Singer Taps."
 authors = [
-    "hotglue",
+  "hotglue <hello@hotglue.xyz>",
+  "Edgar Ramírez-Mondragón <edgarrmondragon@hey.com>",
 ]
-keywords = [
-    "ELT",
-    "GooglePlay",
-]
+maintainers = ["Edgar Ramírez-Mondragón <edgarrmondragon@hey.com>"]
+keywords = ["ELT", "GooglePlay", "Meltano", "singer.io"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
@@ -24,7 +21,7 @@ google-play-scraper = "~=1.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = ">=7"
-singer-sdk = {version = "~=0.31.0", extras = ["testing"]}
+singer-sdk = { version = "~=0.31.0", extras = ["testing"] }
 
 [tool.poetry.scripts]
 # CLI declaration
@@ -32,16 +29,16 @@ tap-google-play = 'tap_google_play.tap:TapGooglePlay.cli'
 
 [tool.ruff]
 ignore = [
-  "ANN101",  # missing-type-self
-  "DJ",      # flake8-django
-  "FIX002",  # line-contains-todo
+  "ANN101", # missing-type-self
+  "DJ",     # flake8-django
+  "FIX002", # line-contains-todo
 ]
 line-length = 88
 select = ["ALL"]
 src = ["tap_google_play", "tests"]
 target-version = "py38"
 unfixable = [
-  "ERA001",  # commented-out-code
+  "ERA001", # commented-out-code
 ]
 
 [tool.ruff.flake8-annotations]
@@ -50,9 +47,9 @@ allow-star-arg-any = true
 [tool.ruff.per-file-ignores]
 "noxfile.py" = ["ANN"]
 "tests/*" = [
-  "ANN201",  # missing-return-type-public-function
-  "S101",    # assert
-  "SLF001",  # private-member-access
+  "ANN201", # missing-return-type-public-function
+  "S101",   # assert
+  "SLF001", # private-member-access
 ]
 
 [tool.ruff.isort]
