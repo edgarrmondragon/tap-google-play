@@ -1,47 +1,50 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: "tap-google-play"
+project_id: tap-google-play
+default_environment: dev
 plugins:
   extractors:
-  - name: "tap-google-play"
-    namespace: "tap_google_play"
+  - name: tap-google-play
+    namespace: tap_google_play
     pip_url: -e .
     capabilities:
     - state
     - catalog
     - discover
-    config:
-      start_date: '2010-01-01T00:00:00Z'
     settings:
-    - description: Your Google Play App ID.
+    - name: app_id
       kind: password
       label: App ID
-      name: app_id
-    - description: "'True' to enable schema flattening and automatically expand nested\
-        \ properties."
+      description: Your Google Play App ID.
+    - name: flattening_enabled
       kind: boolean
       label: Flattening Enabled
-      name: flattening_enabled
-    - description: The max depth to flatten schemas.
+      description: "'True' to enable schema flattening and automatically expand nested\
+        \ properties."
+    - name: flattening_max_depth
       kind: integer
       label: Flattening Max Depth
-      name: flattening_max_depth
-    - description: Determines how much historical data will be extracted. Please be aware
-        that the larger the time period and amount of data, the longer the initial extraction
-        can be expected to take.
+      description: The max depth to flatten schemas.
+    - name: start_date
       kind: date_iso8601
       label: Start Date
-      name: start_date
-    - description: User-defined config values to be used within map expressions.
+      description: Determines how much historical data will be extracted. Please be
+        aware that the larger the time period and amount of data, the longer the initial
+        extraction can be expected to take.
+    - name: stream_map_config
       kind: object
       label: Stream Map Config
-      name: stream_map_config
-    - description: Config object for stream maps capability. For more information check
-        out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html).
+      description: User-defined config values to be used within map expressions.
+    - name: stream_maps
       kind: object
       label: Stream Maps
-      name: stream_maps
+      description: Config object for stream maps capability. For more information
+        check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html).
+    config:
+      start_date: '2010-01-01T00:00:00Z'
   loaders:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
+environments:
+- name: dev

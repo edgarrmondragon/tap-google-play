@@ -28,6 +28,7 @@ class ReviewsStream(GooglePlayStream):
         th.Property("replyContent", th.StringType),
         th.Property("repliedAt", th.DateTimeType),
         th.Property("reviewId", th.StringType),
+        th.Property("appVersion", th.StringType),
     ).to_dict()
 
     def get_records(self, context: dict | None) -> Iterable[dict]:
