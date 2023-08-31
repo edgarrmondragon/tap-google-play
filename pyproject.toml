@@ -1,6 +1,9 @@
 [build-system]
 build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core==1.7", "poetry-dynamic-versioning"]
+requires = [
+  "poetry-core==1.7",
+  "poetry-dynamic-versioning",
+]
 
 [tool.poetry]
 name = "tap-google-play"
