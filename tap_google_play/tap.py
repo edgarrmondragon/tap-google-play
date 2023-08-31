@@ -1,31 +1,37 @@
-from typing import List
+"""Extracts data from Google Play reviews."""
 
-from singer_sdk import Tap, Stream
+from __future__ import annotations
+
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from tap_google_play.streams import (ReviewsStream)
 
-STREAM_TYPES = [ReviewsStream]
+from tap_google_play import streams
+
 
 class TapGooglePlay(Tap):
-    """GooglePlay tap class."""
-    name = "tap-googleplay"
+    """Singer tap for extracting data from the Google Play reviews."""
+
+    name = "tap-google-play"
 
     config_jsonschema = th.PropertiesList(
         th.Property(
             "app_id",
             th.StringType,
-            required=True
+            required=True,
         ),
         th.Property(
             "start_date",
             th.DateTimeType,
-            required=False
-        )
+            required=False,
+        ),
     ).to_dict()
 
-    def discover_streams(self) -> List[Stream]:
+    def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams."""
-        return [stream_class(tap=self) for stream_class in STREAM_TYPES]
+        return [
+            streams.ReviewsStream(tap=self),
+        ]
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     TapGooglePlay.cli()

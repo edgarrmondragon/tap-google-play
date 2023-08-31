@@ -1,6 +1,3 @@
-# Secrets and internal config files
-**/.secrets/*
-
 # Ignore meltano internal cache and sqlite systemdb
 
 .meltano/
@@ -111,7 +108,6 @@ celerybeat.pid
 # Environments
 .env
 .venv
-.vscode
 env/
 venv/
 ENV/
