@@ -34,8 +34,8 @@ Based on [hotglue/tap-google-play](https://gitlab.com/hotglue/tap-google-play).
 
 | Setting             | Required | Default | Description |
 |:--------------------|:--------:|:-------:|:------------|
-| app_id              | True     | None    |             |
-| start_date          | False    | None    |             |
+| app_id              | True     | None    | The app ID to extract reviews from |
+| start_date          | False    | None    | The date to start extracting reviews from |
 | stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
 | stream_map_config   | False    | None    | User-defined config values to be used within map expressions. |
 | flattening_enabled  | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |

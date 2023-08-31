@@ -18,11 +18,13 @@ class TapGooglePlay(Tap):
             "app_id",
             th.StringType,
             required=True,
+            description="The app ID to extract reviews from",
         ),
         th.Property(
             "start_date",
             th.DateTimeType,
             required=False,
+            description="The date to start extracting reviews from",
         ),
     ).to_dict()
 
