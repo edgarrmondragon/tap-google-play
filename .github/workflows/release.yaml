@@ -1,8 +1,10 @@
 name: Publish with Dynamic Versioning
 
 on:
-  release:
-    types: [published]
+  # Publish when a new tag is pushed
+  push:
+    tags:
+      - "v*"
 
 permissions:
   contents: write
