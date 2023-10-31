@@ -32,15 +32,17 @@ singer-sdk = { version = "~=0.33.0", extras = ["testing"] }
 tap-google-play = 'tap_google_play.tap:TapGooglePlay.cli'
 
 [tool.ruff]
+line-length = 88
+src = ["tap_google_play", "tests"]
+target-version = "py38"
+
+[tool.ruff.lint]
 ignore = [
   "ANN101", # missing-type-self
   "DJ",     # flake8-django
   "FIX002", # line-contains-todo
 ]
-line-length = 88
 select = ["ALL"]
-src = ["tap_google_play", "tests"]
-target-version = "py38"
 unfixable = [
   "ERA001", # commented-out-code
 ]

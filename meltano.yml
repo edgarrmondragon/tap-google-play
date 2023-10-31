@@ -46,5 +46,8 @@ plugins:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
+  - name: target-duckdb
+    variant: jwills
+    pip_url: target-duckdb~=0.6
 environments:
 - name: dev
