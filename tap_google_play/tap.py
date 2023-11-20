@@ -36,13 +36,7 @@ class TapGooglePlay(Tap):
 
     def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams."""
-        stream_list = []
-        if self.config.get("app_id_list"):
-            for app_id in self.config.get("app_id_list"):
-                stream_list.append(streams.ReviewsStream(tap=self, name=app_id, app_id=app_id))
-        else:
-            stream_list.append(streams.ReviewsStream(tap=self, name="reviews", app_id=self.config.get("app_id")))
-        return stream_list
+        return [streams.ReviewsStream(tap=self)]
 
 
 if __name__ == "__main__":
