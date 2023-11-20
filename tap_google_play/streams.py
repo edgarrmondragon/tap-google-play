@@ -47,14 +47,12 @@ class ReviewsStream(GooglePlayStream):
             lang='en', # defaults to 'en'
             country='us' # defaults to 'us'
         )
-        context = {"developerId": app_details["developerId"], "appId": self.app_id}
         start_date = self.get_starting_replication_key_value(context)
         if start_date:
             start_date = parse(start_date)
 
         self.logger.info("Getting reviews for %s", self.app_id)
 
-        it = 0
         while True:
             result, continuation_token = reviews(
                 self.app_id,
@@ -67,32 +65,13 @@ class ReviewsStream(GooglePlayStream):
 
             if not result:
                 break
-            if it > 0:
-                break
-            if start_date:
-                for record in result:
-                    if record.get("at") > start_date.replace(tzinfo=None):
-                        yield record
-            else:
-                yield from result
-            it += 1
 
-    def post_process(
-        self,
-        row: dict,
-        context: dict | None = None,  # noqa: ARG002
-    ) -> dict | None:
-        # row
-        row["developerId"] = context["developerId"]
-        row["appId"] = context["appId"]
-        return super().post_process(row, context)
-    
-    # def post_process(
-    #     self,
-    #     row: dict,
-    #     context: dict | None = None,  # noqa: ARG002
-    # ) -> dict | None:
-    #     # row
-    #     row["developerId"] = context["developerId"]
-    #     row["appId"] = context["appId"]
-    #     return super().post_process(row, context)
+            for record in result:
+                if start_date and record.get("at") < start_date.replace(tzinfo=None):
+                    break
+                record["developerId"] = app_details["developerId"]
+                record["appId"] = self.app_id
+                yield record
+            else:
+                continue
+            break
