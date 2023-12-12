@@ -38,5 +38,6 @@ class TapGooglePlay(Tap):
             streams.ReviewsStream(tap=self),
         ]
 
+
 if __name__ == "__main__":
     TapGooglePlay.cli()
