@@ -62,7 +62,7 @@ class ReviewsStream(GooglePlayStream):
 
                 for record in result:
                     if start_date and record.get("at") < start_date.replace(
-                        tzinfo=None
+                        tzinfo=None,
                     ):
                         break
                     record["developerId"] = app_details["developerId"]
