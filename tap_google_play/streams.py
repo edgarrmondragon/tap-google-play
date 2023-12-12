@@ -40,7 +40,7 @@ class ReviewsStream(GooglePlayStream):
         if start_date:
             start_date = parse(start_date)
 
-        for app_id in self.config.get("app_id_list"):
+        for app_id in self.config.get("app_id_list", [self.config.get("app_id")]):
             self.logger.info("Getting reviews for %s", app_id)
             app_details = app(
                 app_id,
