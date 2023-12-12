@@ -1,15 +1,12 @@
 """Stream type classes for tap-google-play."""
 
 from __future__ import annotations
-from os import PathLike
 
 from typing import Iterable
 
-from google_play_scraper import Sort, reviews, app
+from google_play_scraper import Sort, app, reviews
 from pendulum import parse
 from singer_sdk import typing as th
-import singer_sdk._singerlib as singer
-from singer_sdk.tap_base import Tap
 
 from tap_google_play.client import GooglePlayStream
 
@@ -18,7 +15,6 @@ class ReviewsStream(GooglePlayStream):
     """Define custom stream."""
 
     name = "reviews"
-        
     primary_keys = ["reviewId"]  # noqa: RUF012
     replication_key = "at"
     schema = th.PropertiesList(
@@ -48,8 +44,8 @@ class ReviewsStream(GooglePlayStream):
             self.logger.info("Getting reviews for %s", app_id)
             app_details = app(
                 app_id,
-                lang='en', # defaults to 'en'
-                country='us' # defaults to 'us'
+                lang='en',
+                country='us'
             )
             continuation_token = None
             while True:

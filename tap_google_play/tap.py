@@ -17,14 +17,12 @@ class TapGooglePlay(Tap):
         th.Property(
             "app_id",
             th.StringType,
-            # required=True,
-            description="The app ID to extract reviews from",
+            description="The app ID to extract reviews from.",
         ),
         th.Property(
             "app_id_list",
             th.ArrayType(th.StringType),
-            # required=True,
-            description="The app ID to extract reviews from",
+            description="A list of app IDs to extract reviews from.",
         ),
         th.Property(
             "start_date",
@@ -36,8 +34,9 @@ class TapGooglePlay(Tap):
 
     def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams."""
-        return [streams.ReviewsStream(tap=self)]
-
+        return [
+            streams.ReviewsStream(tap=self),
+        ]
 
 if __name__ == "__main__":
     TapGooglePlay.cli()
