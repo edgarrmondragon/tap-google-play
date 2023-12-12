@@ -35,7 +35,6 @@ class ReviewsStream(GooglePlayStream):
 
     def get_records(self, context: dict | None) -> Iterable[dict]:
         """Return a generator of row-type dictionary objects."""
-
         start_date = self.get_starting_replication_key_value(context)
         if start_date:
             start_date = parse(start_date)
@@ -44,8 +43,8 @@ class ReviewsStream(GooglePlayStream):
             self.logger.info("Getting reviews for %s", app_id)
             app_details = app(
                 app_id,
-                lang='en',
-                country='us'
+                lang="en",
+                country="us",
             )
             continuation_token = None
             while True:
@@ -62,7 +61,9 @@ class ReviewsStream(GooglePlayStream):
                     break
 
                 for record in result:
-                    if start_date and record.get("at") < start_date.replace(tzinfo=None):
+                    if start_date and record.get("at") < start_date.replace(
+                        tzinfo=None,
+                    ):
                         break
                     record["developerId"] = app_details["developerId"]
                     record["appId"] = app_id

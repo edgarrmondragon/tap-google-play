@@ -20,7 +20,7 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
-singer-sdk = "~=0.33.0"
+singer-sdk = "~=0.34.0"
 google-play-scraper = "~=1.2.0"
 
 [tool.poetry.dev-dependencies]
@@ -30,6 +30,21 @@ singer-sdk = { version = "*", extras = ["testing"] }
 [tool.poetry.scripts]
 # CLI declaration
 tap-google-play = 'tap_google_play.tap:TapGooglePlay.cli'
+
+[tool.poetry-dynamic-versioning]
+enable = true
+format-jinja = """
+    {%- if distance == 0 -%}
+        {{ serialize_pep440(base, stage, revision) }}
+    {%- elif revision is not none -%}
+        {{ serialize_pep440(base, stage, revision + 1, dev=distance, metadata=[commit]) }}
+    {%- else -%}
+        {{ serialize_pep440(bump_version(base), stage, revision, dev=distance, metadata=[commit]) }}
+    {%- endif -%}
+"""
+metadata = true
+style = "pep440"
+vcs = "git"
 
 [tool.ruff]
 line-length = 88
@@ -69,20 +84,5 @@ convention = "google"
 addopts = "-vvv"
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.11"
 warn_unused_configs = true
-
-[tool.poetry-dynamic-versioning]
-enable = true
-format-jinja = """
-    {%- if distance == 0 -%}
-        {{ serialize_pep440(base, stage, revision) }}
-    {%- elif revision is not none -%}
-        {{ serialize_pep440(base, stage, revision + 1, dev=distance, metadata=[commit]) }}
-    {%- else -%}
-        {{ serialize_pep440(bump_version(base), stage, revision, dev=distance, metadata=[commit]) }}
-    {%- endif -%}
-"""
-metadata = true
-style = "pep440"
-vcs = "git"
