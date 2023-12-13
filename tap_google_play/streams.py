@@ -56,7 +56,12 @@ class ReviewsStream(GooglePlayStream):
                     break
 
                 for record in result:
-                    if start_date and record.get("at") < start_date:
+                    replication_value = record.get("at")
+                    if (
+                        start_date
+                        and replication_value
+                        and replication_value < start_date
+                    ):
                         break
                     record["developerId"] = app_details["developerId"]
                     record["appId"] = app_id
