@@ -17,8 +17,12 @@ class TapGooglePlay(Tap):
         th.Property(
             "app_id",
             th.StringType,
-            required=True,
-            description="The app ID to extract reviews from",
+            description="The app ID to extract reviews from.",
+        ),
+        th.Property(
+            "app_id_list",
+            th.ArrayType(th.StringType),
+            description="A list of app IDs to extract reviews from.",
         ),
         th.Property(
             "start_date",

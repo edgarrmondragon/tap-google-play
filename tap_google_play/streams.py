@@ -4,8 +4,7 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from google_play_scraper import Sort, reviews
-from pendulum import parse
+from google_play_scraper import Sort, app, reviews
 from singer_sdk import typing as th
 
 from tap_google_play.client import GooglePlayStream
@@ -29,36 +28,41 @@ class ReviewsStream(GooglePlayStream):
         th.Property("repliedAt", th.DateTimeType),
         th.Property("reviewId", th.StringType),
         th.Property("appVersion", th.StringType),
+        th.Property("appId", th.StringType),
+        th.Property("developerId", th.StringType),
     ).to_dict()
 
     def get_records(self, context: dict | None) -> Iterable[dict]:
         """Return a generator of row-type dictionary objects."""
-        app_id = self.config.get("app_id")
-
-        continuation_token = None
-
-        start_date = self.get_starting_replication_key_value(context)
+        start_date = self.get_starting_timestamp(context)
         if start_date:
-            start_date = parse(start_date)
+            start_date = start_date.replace(tzinfo=None)
 
-        self.logger.info("Getting reviews for %s", app_id)
+        for app_id in self.config.get("app_id_list", [self.config.get("app_id")]):
+            self.logger.info("Getting reviews for %s", app_id)
+            app_details = app(app_id, lang="en", country="us")
+            continuation_token = None
+            while True:
+                result, continuation_token = reviews(
+                    app_id,
+                    lang="en",
+                    country="us",
+                    sort=Sort.NEWEST.value,
+                    count=1000,
+                    continuation_token=continuation_token,
+                )
 
-        while True:
-            result, continuation_token = reviews(
-                app_id,
-                lang="en",
-                country="us",
-                sort=Sort.NEWEST,
-                count=1000,
-                continuation_token=continuation_token,
-            )
+                if not result:
+                    break
 
-            if not result:
-                break
-
-            if start_date:
                 for record in result:
-                    if record.get("at") > start_date.replace(tzinfo=None):
-                        yield record
-            else:
-                yield from result
+                    replication_value = record.get("at")
+                    if (
+                        start_date
+                        and replication_value
+                        and replication_value < start_date
+                    ):
+                        break
+                    record["developerId"] = app_details["developerId"]
+                    record["appId"] = app_id
+                    yield record
