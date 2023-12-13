@@ -52,7 +52,7 @@ class ReviewsStream(GooglePlayStream):
                     app_id,
                     lang="en",
                     country="us",
-                    sort=Sort.NEWEST,
+                    sort=Sort.NEWEST.value,
                     count=1000,
                     continuation_token=continuation_token,
                 )
@@ -68,6 +68,3 @@ class ReviewsStream(GooglePlayStream):
                     record["developerId"] = app_details["developerId"]
                     record["appId"] = app_id
                     yield record
-                else:
-                    continue
-                break
