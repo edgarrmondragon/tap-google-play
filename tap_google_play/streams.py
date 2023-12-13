@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Iterable
 
 from google_play_scraper import Sort, app, reviews
-from pendulum import parse
 from singer_sdk import typing as th
 
 from tap_google_play.client import GooglePlayStream
@@ -35,17 +34,13 @@ class ReviewsStream(GooglePlayStream):
 
     def get_records(self, context: dict | None) -> Iterable[dict]:
         """Return a generator of row-type dictionary objects."""
-        start_date = self.get_starting_replication_key_value(context)
+        start_date = self.get_starting_timestamp(context)
         if start_date:
-            start_date = parse(start_date)
+            start_date = start_date.replace(tzinfo=None)
 
         for app_id in self.config.get("app_id_list", [self.config.get("app_id")]):
             self.logger.info("Getting reviews for %s", app_id)
-            app_details = app(
-                app_id,
-                lang="en",
-                country="us",
-            )
+            app_details = app(app_id, lang="en", country="us")
             continuation_token = None
             while True:
                 result, continuation_token = reviews(
@@ -61,9 +56,7 @@ class ReviewsStream(GooglePlayStream):
                     break
 
                 for record in result:
-                    if start_date and record.get("at") < start_date.replace(
-                        tzinfo=None,
-                    ):
+                    if start_date and record.get("at") < start_date:
                         break
                     record["developerId"] = app_details["developerId"]
                     record["appId"] = app_id
