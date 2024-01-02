@@ -9,7 +9,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-      timezone: "UTC"
+      timezone: "Etc/UTC"
       time: "10:00"
     reviewers:
       - "edgarrmondragon"
@@ -21,7 +21,7 @@ updates:
     directory: "/.github/workflows"
     schedule:
       interval: "monthly"
-      timezone: "UTC"
+      timezone: "Etc/UTC"
       time: "10:00"
     commit-message:
       prefix: "ci: "
@@ -31,9 +31,13 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-      timezone: "UTC"
+      timezone: "Etc/UTC"
       time: "10:00"
     reviewers:
       - "edgarrmondragon"
     commit-message:
       prefix: "ci: "
+    groups:
+      actions:
+        patterns:
+          - "*"
