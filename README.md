@@ -12,6 +12,9 @@
   <a href="https://github.com/astral-sh/ruff">
     <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;">
   </a>
+  <a href="https://pypi.org/p/tap-google-play/">
+    <img alt="Python versions" src="https://img.shields.io/pypi/pyversions/tap-google-play"/>
+  </a>
 </div>
 
 Singer tap for Google Play Reviews. Built with the [Meltano Singer SDK](https://sdk.meltano.com).
