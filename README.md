@@ -3,6 +3,9 @@
 # tap-google-play
 
 <div>
+  <a href="https://pypi.org/p/tap-google-play/">
+    <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/tap-google-play">
+  </a>
   <a href="https://results.pre-commit.ci/latest/github/edgarrmondragon/tap-google-play/main">
     <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/edgarrmondragon/tap-google-play/main.svg"/>
   </a>
@@ -47,13 +50,6 @@ Based on [hotglue/tap-google-play](https://gitlab.com/hotglue/tap-google-play).
 | batch_config        | False    | None    |             |
 
 A full list of supported settings and capabilities is available by running: `tap-google-play --about`
-
-## Supported Python Versions
-
-* 3.8
-* 3.9
-* 3.10
-* 3.11
 
 ## Usage
 
