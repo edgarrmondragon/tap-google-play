@@ -24,7 +24,7 @@ Singer tap for Google Play Reviews. Built with the [Meltano Singer SDK](https://
 
 Based on [hotglue/tap-google-play](https://gitlab.com/hotglue/tap-google-play).
 
-</div
+</div>
 
 ## Capabilities
 
