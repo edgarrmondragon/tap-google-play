@@ -84,11 +84,7 @@ convention = "google"
 addopts = "-vvv"
 filterwarnings = [
   "error",
-  "ignore:No records were available to test:UserWarning",
-  "ignore:jsonschema.RefResolver is deprecated:DeprecationWarning",
-  "ignore:pkg_resources is deprecated:DeprecationWarning",
-  """ignore:Deprecated call to \\`pkg_resources.declare_namespace\\('fs'\\)\\`.:DeprecationWarning""",
-  """ignore:Deprecated call to \\`pkg_resources.declare_namespace\\('fs.opener'\\)\\`.:DeprecationWarning""",
+  "default:No records were available to test:UserWarning",
 ]
 
 [tool.mypy]
