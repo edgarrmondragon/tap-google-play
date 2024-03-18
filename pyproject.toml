@@ -25,7 +25,7 @@ google-play-scraper = { version = "==1.2.4", python = "<4" }
 
 [tool.poetry.dev-dependencies]
 pytest = ">=7"
-singer-sdk = { version = "~=0.36.0", extras = ["testing"] }
+singer-sdk = { version = "~=0.36.1", extras = ["testing"] }
 
 [tool.poetry.scripts]
 # CLI declaration
