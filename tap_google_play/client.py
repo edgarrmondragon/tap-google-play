@@ -1,4 +1,4 @@
-""""HTTP Client for GooglePlay tap."""
+"""HTTP Client for GooglePlay tap."""
 
 from __future__ import annotations
 
