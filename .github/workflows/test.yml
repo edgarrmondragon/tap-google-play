@@ -32,7 +32,7 @@ jobs:
       FORCE_COLOR: "1"
       NOXPYTHON: ${{ matrix.python-version }}
       NOXSESSION: tests
-      PIP_CONSTRAINT: .github/workflows/constraints.txt
+      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
