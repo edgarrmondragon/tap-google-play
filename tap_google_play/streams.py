@@ -16,6 +16,7 @@ class ReviewsStream(GooglePlayStream):
     name = "reviews"
     primary_keys = ["reviewId"]  # noqa: RUF012
     replication_key = "at"
+    is_sorted = True
     schema = th.PropertiesList(
         th.Property("userName", th.StringType),
         th.Property("userImage", th.StringType),
