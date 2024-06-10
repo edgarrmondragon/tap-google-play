@@ -397,13 +397,13 @@ scandir = ["scandir (>=1.5,<2.0)"]
 
 [[package]]
 name = "google-play-scraper"
-version = "1.2.4"
+version = "1.2.7"
 description = "Google-Play-Scraper provides APIs to easily crawl the Google Play Store for Python without any external dependencies!"
 optional = false
-python-versions = ">=3.7,<4.0"
+python-versions = "<4.0,>=3.7"
 files = [
-    {file = "google_play_scraper-1.2.4-py3-none-any.whl", hash = "sha256:99a5af02dd5fc46143b5e56afb2a5f329f1d30b18633d28c08fd1f1988fff48b"},
-    {file = "google_play_scraper-1.2.4.tar.gz", hash = "sha256:cbda99d611a6de9a3e755785a42f13c3157bbd36089c742b45d24856afbfd5f7"},
+    {file = "google_play_scraper-1.2.7-py3-none-any.whl", hash = "sha256:a485510b09265f0096fc3813cfc26eef27e9a5c0035f99ee23f80e00de724530"},
+    {file = "google_play_scraper-1.2.7.tar.gz", hash = "sha256:284f321d1b2c39e39e97e490d51bc316e1d876802360efb7e7463b5c16ed4972"},
 ]
 
 [[package]]
@@ -1400,4 +1400,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8"
-content-hash = "4d393926b056a60fe550c6a733814a4fbe39f41c435d43f0e280a3143a249fdb"
+content-hash = "c299941a8d66bc28f2261f6b13fe1f725e83145e2f10adcbd23207702f8dce79"
