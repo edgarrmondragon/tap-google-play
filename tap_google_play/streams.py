@@ -47,7 +47,7 @@ class ReviewsStream(GooglePlayStream):
                     app_id,
                     lang="en",
                     country="us",
-                    sort=int(Sort.NEWEST),
+                    sort=Sort.NEWEST,
                     count=1000,
                     continuation_token=continuation_token,
                 )
