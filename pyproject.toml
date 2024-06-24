@@ -27,12 +27,12 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-singer-sdk = "~=0.37.0"
+singer-sdk = "~=0.38.0"
 google-play-scraper = { version = "==1.2.7", python = "<4" }
 
 [tool.poetry.dev-dependencies]
 pytest = ">=7"
-singer-sdk = { version = "~=0.37.0", extras = [
+singer-sdk = { version = "~=0.38.0", extras = [
   "testing",
 ] }
 
