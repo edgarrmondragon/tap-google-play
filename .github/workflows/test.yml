@@ -35,7 +35,13 @@ jobs:
       PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version:
+        - "3.8"
+        - "3.9"
+        - "3.10"
+        - "3.11"
+        - "3.12"
+        - "3.13"
 
     steps:
     - name: Checkout code
@@ -45,6 +51,9 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+        allow-prereleases: true
+        cache: pip
+        cache-dependency-path: poetry.lock
 
     - name: Upgrade pip
       run: |
@@ -67,4 +76,4 @@ jobs:
       env:
         TAP_GOOGLE_PLAY_APP_ID: com.ifountain.opsgenie
       run: |
-        nox
+        nox --verbose
