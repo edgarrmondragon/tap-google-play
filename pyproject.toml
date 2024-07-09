@@ -17,6 +17,14 @@ authors = [
 maintainers = [
   "Edgar Ramírez-Mondragón <edgarrmondragon@hey.com>",
 ]
+classifiers = [
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
 keywords = [
   "ELT",
   "GooglePlay",
@@ -27,6 +35,7 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.8"
+cffi = { version = ">=1.17.0rc1", python = ">=3.13" }
 singer-sdk = "~=0.38.0"
 google-play-scraper = { version = "==1.2.7", python = "<4" }
 
@@ -90,6 +99,9 @@ lint.isort.required-imports = [
   "from __future__ import annotations",
 ]
 lint.pydocstyle.convention = "google"
+
+[tool.pyproject-fmt]
+max_supported_python = "3.13"
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
