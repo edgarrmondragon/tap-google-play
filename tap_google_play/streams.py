@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+import typing as t
 
 from google_play_scraper import Sort, app, reviews
 from singer_sdk import typing as th
 
 from tap_google_play.client import GooglePlayStream
+
+if t.TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context
 
 
 class ReviewsStream(GooglePlayStream):
@@ -32,7 +35,7 @@ class ReviewsStream(GooglePlayStream):
         th.Property("developerId", th.StringType),
     ).to_dict()
 
-    def get_records(self, context: dict | None) -> Iterable[dict]:
+    def get_records(self, context: Context | None) -> t.Iterable[dict]:
         """Return a generator of row-type dictionary objects."""
         start_date = self.get_starting_timestamp(context)
         if start_date:

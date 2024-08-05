@@ -49,6 +49,9 @@ singer-sdk = { version = "~=0.39.0", extras = [
 # CLI declaration
 tap-google-play = 'tap_google_play.tap:TapGooglePlay.cli'
 
+[tool.poetry.group.dev.dependencies]
+mypy = ">=1.11.1"
+
 [tool.poetry-dynamic-versioning]
 enable = true
 format-jinja = """
@@ -116,3 +119,9 @@ warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module = [
+  "google_play_scraper.*", # https://github.com/JoMingyu/google-play-scraper/issues/223
+]

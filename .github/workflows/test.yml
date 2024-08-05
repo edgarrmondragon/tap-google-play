@@ -77,3 +77,37 @@ jobs:
         TAP_GOOGLE_PLAY_APP_ID: com.ifountain.opsgenie
       run: |
         nox --verbose
+
+  typing:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: pip
+        cache-dependency-path: poetry.lock
+
+    - name: Upgrade pip
+      run: |
+        pip install pip
+        pip --version
+
+    - name: Install Poetry
+      run: |
+        pipx install poetry
+        poetry --version
+        poetry self show plugins
+
+    - name: Install Nox
+      run: |
+        pipx install nox
+        pipx inject nox nox-poetry
+        nox --version
+
+    - name: Run typing checks
+      run: |
+        nox --verbose -s mypy
