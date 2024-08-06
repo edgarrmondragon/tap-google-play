@@ -8,7 +8,7 @@ requires = [
 [tool.poetry]
 name = "tap-google-play"
 version = "0.1.0"
-description = "`tap-google-play` is a Singer tap for GooglePlay, built with the Meltano SDK for Singer Taps."
+description = "Singer tap for GooglePlay, built with the Meltano SDK for Singer Taps."
 readme = "README.md"
 authors = [
   "hotglue <hello@hotglue.xyz>",
