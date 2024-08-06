@@ -35,7 +35,6 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-cffi = { version = ">=1.17.0rc1", python = ">=3.13" }
 singer-sdk = "~=0.39.0"
 google-play-scraper = { version = "==1.2.7", python = "<4" }
 
