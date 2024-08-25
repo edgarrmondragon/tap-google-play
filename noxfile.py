@@ -20,7 +20,14 @@ nox.options.sessions = ("tests",)
 @nox.session(python=python_versions)
 def tests(session: nox.Session) -> None:
     """Execute pytest tests."""
-    session.run("uv", "run", "--python", f"python{session.python}", "pytest")
+    session.run(
+        "uv",
+        "run",
+        "--verbose",
+        "--python",
+        f"python{session.python}",
+        "pytest",
+    )
 
 
 @nox.session
