@@ -16,11 +16,12 @@ plugins:
       kind: password
       label: App ID
       description: Your Google Play App ID.
+      sensitive: true
     - name: flattening_enabled
       kind: boolean
       label: Flattening Enabled
-      description: "'True' to enable schema flattening and automatically expand nested\
-        \ properties."
+      description: "'True' to enable schema flattening and automatically expand nested
+        properties."
     - name: flattening_max_depth
       kind: integer
       label: Flattening Max Depth
@@ -51,3 +52,5 @@ plugins:
     pip_url: target-duckdb~=0.6
 environments:
 - name: dev
+venv:
+  backend: uv
