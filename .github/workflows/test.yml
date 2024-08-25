@@ -25,14 +25,15 @@ on:
   - cron: "0 10 * * *"
   workflow_dispatch:
 
+env:
+  FORCE_COLOR: "1"
+
 jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      FORCE_COLOR: "1"
       NOXPYTHON: ${{ matrix.python-version }}
       NOXSESSION: tests
-      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       matrix:
         python-version:
