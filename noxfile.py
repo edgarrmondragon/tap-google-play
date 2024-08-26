@@ -2,20 +2,7 @@
 
 from __future__ import annotations
 
-import os
-import sys
-from textwrap import dedent
-
 import nox
-
-try:
-    from nox_poetry import Session, session
-except ImportError:
-    message = f"""\
-    Nox failed to import the 'nox-poetry' package.
-    Please install it using the following command:
-    {sys.executable} -m pip install nox-poetry"""
-    raise SystemExit(dedent(message)) from None
 
 python_versions = [
     "3.13",
@@ -25,26 +12,27 @@ python_versions = [
     "3.9",
     "3.8",
 ]
+nox.needs_version = ">=2024.4.15"
+nox.options.default_venv_backend = "uv"
 nox.options.sessions = ("tests",)
 
 
-@session(python=python_versions)
-def tests(session: Session) -> None:
+@nox.session(python=python_versions)
+def tests(session: nox.Session) -> None:
     """Execute pytest tests."""
-    deps = ["pytest", "pytest-durations"]
-    if "GITHUB_ACTIONS" in os.environ:
-        deps.append("pytest-github-actions-annotate-failures")
+    session.run(
+        "uv",
+        "run",
+        "--verbose",
+        "--python",
+        f"python{session.python}",
+        "pytest",
+        *session.posargs,
+    )
 
-    session.install(".")
-    session.install(*deps)
-    session.run("pytest", *session.posargs)
 
-
-@session
-def mypy(session: Session) -> None:
+@nox.session
+def mypy(session: nox.Session) -> None:
     """Check types."""
-    deps = ["mypy"]
     args = session.posargs or ("tap_google_play",)
-    session.install(".")
-    session.install(*deps)
-    session.run("mypy", *args)
+    session.run("uv", "run", "mypy", *args)

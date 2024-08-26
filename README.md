@@ -77,13 +77,13 @@ poetry install
 Create tests within the `tests` subfolder and then run:
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
 You can also test the `tap-google-play` CLI interface directly using `poetry run`:
 
 ```bash
-poetry run tap-google-play --help
+uv run tap-google-play --help
 ```
 
 ### Testing with [Meltano](https://www.meltano.com)
@@ -98,7 +98,11 @@ Next, install Meltano (if you haven't already) and any needed plugins:
 
 ```bash
 # Install meltano
-pipx install meltano
+uv tool install meltano
+
+# Install meltano
+meltano config meltano set venv.backend uv
+
 # Initialize meltano within this directory
 cd tap-google-play
 meltano install
@@ -109,8 +113,9 @@ Now you can test and orchestrate using Meltano:
 ```bash
 # Test invocation:
 meltano invoke tap-google-play --version
+
 # OR run a test `elt` pipeline:
-meltano elt tap-google-play target-jsonl
+meltano run tap-google-play target-jsonl
 ```
 
 ### SDK Dev Guide

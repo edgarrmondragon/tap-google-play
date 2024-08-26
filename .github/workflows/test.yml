@@ -25,14 +25,15 @@ on:
   - cron: "0 10 * * *"
   workflow_dispatch:
 
+env:
+  FORCE_COLOR: "1"
+
 jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      FORCE_COLOR: "1"
       NOXPYTHON: ${{ matrix.python-version }}
       NOXSESSION: tests
-      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       matrix:
         python-version:
@@ -52,24 +53,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-        cache: pip
-        cache-dependency-path: poetry.lock
 
-    - name: Upgrade pip
-      run: |
-        pip install pip
-        pip --version
-
-    - name: Install Poetry
-      run: |
-        pipx install poetry
-        poetry --version
-        poetry self show plugins
+    - uses: hynek/setup-cached-uv@v2
 
     - name: Install Nox
       run: |
-        pipx install nox
-        pipx inject nox nox-poetry
+        uv tool install nox
         nox --version
 
     - name: Run tests
@@ -88,24 +77,12 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-        cache: pip
-        cache-dependency-path: poetry.lock
 
-    - name: Upgrade pip
-      run: |
-        pip install pip
-        pip --version
-
-    - name: Install Poetry
-      run: |
-        pipx install poetry
-        poetry --version
-        poetry self show plugins
+    - uses: hynek/setup-cached-uv@v2
 
     - name: Install Nox
       run: |
-        pipx install nox
-        pipx inject nox nox-poetry
+        uv tool install nox
         nox --version
 
     - name: Run typing checks
