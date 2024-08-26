@@ -7,8 +7,8 @@ on:
     - tap_google_play/**
     - tests/**
     - noxfile.py
-    - poetry.lock
     - pyproject.toml
+    - uv.lock
     - .github/workflows/test.yml
     - .github/workflows/constraints.txt
   pull_request:
@@ -17,8 +17,8 @@ on:
     - tap_google_play/**
     - tests/**
     - noxfile.py
-    - poetry.lock
     - pyproject.toml
+    - uv.lock
     - .github/workflows/test.yml
     - .github/workflows/constraints.txt
   schedule:

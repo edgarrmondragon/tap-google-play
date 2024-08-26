@@ -67,10 +67,7 @@ tap-google-play --config CONFIG --discover > ./catalog.json
 
 ### Initialize your Development Environment
 
-```bash
-pipx install poetry
-poetry install
-```
+Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already.
 
 ### Create and Run Tests
 
@@ -80,7 +77,7 @@ Create tests within the `tests` subfolder and then run:
 uv run pytest
 ```
 
-You can also test the `tap-google-play` CLI interface directly using `poetry run`:
+You can also test the `tap-google-play` CLI interface directly using `uv run`:
 
 ```bash
 uv run tap-google-play --help
