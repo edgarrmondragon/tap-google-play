@@ -25,6 +25,20 @@ class TapGooglePlay(Tap):
             description="A list of app IDs to extract reviews from.",
         ),
         th.Property(
+            "countries",
+            th.ArrayType(th.StringType),
+            required=False,
+            description="The countries to extract reviews from",
+            default=["us"],
+        ),
+        th.Property(
+            "languages",
+            th.ArrayType(th.StringType),
+            required=False,
+            description="The languages to extract reviews from",
+            default=["en"],
+        ),
+        th.Property(
             "start_date",
             th.DateTimeType,
             required=False,

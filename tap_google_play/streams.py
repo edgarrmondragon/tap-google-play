@@ -33,13 +33,22 @@ class ReviewsStream(GooglePlayStream):
         th.Property("appVersion", th.StringType),
         th.Property("appId", th.StringType),
         th.Property("developerId", th.StringType),
+        th.Property("language", th.StringType),
+        th.Property("country", th.StringType),
     ).to_dict()
 
     @property
     def partitions(self) -> list[Context]:
         """Return a list of partitions for the stream."""
         app_ids = self.config.get("app_id_list", [self.config.get("app_id")])
-        return [{"appId": app_id} for app_id in app_ids]
+        languages = self.config.get("languages", ["en"])
+        countries = self.config.get("countries", ["us"])
+        return [
+            {"appId": app_id, "language": lang, "country": country}
+            for app_id in app_ids
+            for lang in languages
+            for country in countries
+        ]
 
     def get_records(self, context: Context | None) -> t.Iterable[dict]:
         """Return a generator of row-type dictionary objects."""
@@ -52,6 +61,8 @@ class ReviewsStream(GooglePlayStream):
             raise RuntimeError(msg)
 
         app_id = context["appId"]
+        lang = context["language"]
+        country = context["country"]
 
         self.logger.info("Getting reviews for %s", app_id)
         app_details = app(app_id, lang="en", country="us")
@@ -59,8 +70,8 @@ class ReviewsStream(GooglePlayStream):
         while True:
             result, continuation_token = reviews(
                 app_id,
-                lang="en",
-                country="us",
+                lang=lang,
+                country=country,
                 sort=Sort.NEWEST,
                 count=1000,
                 continuation_token=continuation_token,
