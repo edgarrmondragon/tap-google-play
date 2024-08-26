@@ -27,14 +27,12 @@ def tests(session: nox.Session) -> None:
         "--python",
         f"python{session.python}",
         "pytest",
+        *session.posargs,
     )
 
 
 @nox.session
 def mypy(session: nox.Session) -> None:
     """Check types."""
-    deps = ["mypy"]
     args = session.posargs or ("tap_google_play",)
-    session.install(".")
-    session.install(*deps)
-    session.run("mypy", *args)
+    session.run("uv", "run", "mypy", *args)
