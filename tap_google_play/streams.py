@@ -35,37 +35,43 @@ class ReviewsStream(GooglePlayStream):
         th.Property("developerId", th.StringType),
     ).to_dict()
 
+    @property
+    def partitions(self) -> list[Context]:
+        """Return a list of partitions for the stream."""
+        app_ids = self.config.get("app_id_list", [self.config.get("app_id")])
+        return [{"appId": app_id} for app_id in app_ids]
+
     def get_records(self, context: Context | None) -> t.Iterable[dict]:
         """Return a generator of row-type dictionary objects."""
         start_date = self.get_starting_timestamp(context)
         if start_date:
             start_date = start_date.replace(tzinfo=None)
 
-        for app_id in self.config.get("app_id_list", [self.config.get("app_id")]):
-            self.logger.info("Getting reviews for %s", app_id)
-            app_details = app(app_id, lang="en", country="us")
-            continuation_token = None
-            while True:
-                result, continuation_token = reviews(
-                    app_id,
-                    lang="en",
-                    country="us",
-                    sort=Sort.NEWEST,
-                    count=1000,
-                    continuation_token=continuation_token,
-                )
+        if not context:
+            msg = "Context is required for this stream"
+            raise RuntimeError(msg)
 
-                if not result:
+        app_id = context["appId"]
+
+        self.logger.info("Getting reviews for %s", app_id)
+        app_details = app(app_id, lang="en", country="us")
+        continuation_token = None
+        while True:
+            result, continuation_token = reviews(
+                app_id,
+                lang="en",
+                country="us",
+                sort=Sort.NEWEST,
+                count=1000,
+                continuation_token=continuation_token,
+            )
+
+            if not result:
+                break
+
+            for record in result:
+                replication_value = record.get("at")
+                if start_date and replication_value and replication_value < start_date:
                     break
-
-                for record in result:
-                    replication_value = record.get("at")
-                    if (
-                        start_date
-                        and replication_value
-                        and replication_value < start_date
-                    ):
-                        break
-                    record["developerId"] = app_details["developerId"]
-                    record["appId"] = app_id
-                    yield record
+                record["developerId"] = app_details["developerId"]
+                yield record
