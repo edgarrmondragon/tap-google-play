@@ -37,7 +37,7 @@ classifiers = [
 dynamic = [ "version" ]
 dependencies = [
   "google-play-scraper==1.2.7",
-  "singer-sdk~=0.39.0",
+  "singer-sdk~=0.40.0",
 ]
 
 scripts.tap-google-play = "tap_google_play.tap:TapGooglePlay.cli"
@@ -106,6 +106,6 @@ module = [
 dev-dependencies = [
   "mypy>=1.11.1",
   "pytest>=7",
-  "singer-sdk[testing]~=0.39.1",
+  "singer-sdk[testing]",
   "pytest-github-actions-annotate-failures>=0.2.0",
 ]
