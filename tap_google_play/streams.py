@@ -36,7 +36,7 @@ class ReviewsStream(GooglePlayStream):
     ).to_dict()
 
     @property
-    def partitions(self) -> list[Context]:
+    def partitions(self) -> list[dict]:
         """Return a list of partitions for the stream."""
         app_ids = self.config.get("app_id_list", [self.config.get("app_id")])
         return [{"appId": app_id} for app_id in app_ids]
