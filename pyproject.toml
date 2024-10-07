@@ -37,7 +37,7 @@ classifiers = [
 dynamic = [ "version" ]
 dependencies = [
   "google-play-scraper==1.2.7",
-  "singer-sdk~=0.40.0",
+  "singer-sdk~=0.41.0",
 ]
 
 scripts.tap-google-play = "tap_google_play.tap:TapGooglePlay.cli"
