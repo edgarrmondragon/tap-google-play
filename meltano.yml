@@ -17,6 +17,11 @@ plugins:
       label: App ID
       description: Your Google Play App ID.
       sensitive: true
+    - name: app_id_list
+      kind: array
+      label: App IDd
+      description: Your Google Play App IDs.
+      sensitive: true
     - name: flattening_enabled
       kind: boolean
       label: Flattening Enabled
