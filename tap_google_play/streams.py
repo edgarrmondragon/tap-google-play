@@ -21,10 +21,10 @@ class ReviewsStream(GooglePlayStream):
     replication_key = "at"
     schema = th.PropertiesList(
         th.Property("userName", th.StringType),
-        th.Property("userImage", th.StringType),
+        th.Property("userImage", th.URIType),
         th.Property("content", th.StringType),
-        th.Property("score", th.IntegerType),
-        th.Property("thumbsUpCount", th.IntegerType),
+        th.Property("score", th.IntegerType(minimum=0, maximum=5)),
+        th.Property("thumbsUpCount", th.IntegerType(minimum=0)),
         th.Property("reviewCreatedVersion", th.StringType),
         th.Property("at", th.DateTimeType),
         th.Property("replyContent", th.StringType),
