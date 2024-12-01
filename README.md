@@ -38,16 +38,18 @@ Based on [hotglue/tap-google-play](https://gitlab.com/hotglue/tap-google-play).
 
 ## Settings
 
-| Setting             | Required | Default | Description |
-|:--------------------|:--------:|:-------:|:------------|
-| app_id              | False    | None    | The app ID to extract reviews from. |
-| app_id_list         | False    | None    | A list of app IDs to extract reviews from. |
-| start_date          | False    | None    | The date to start extracting reviews from |
-| stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
-| stream_map_config   | False    | None    | User-defined config values to be used within map expressions. |
-| flattening_enabled  | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
-| flattening_max_depth| False    | None    | The max depth to flatten schemas. |
-| batch_config        | False    | None    |             |
+| Setting              | Required | Default | Description                                                                                                                                 |
+| :------------------- | :------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| app_id               | False    | None    | The app ID to extract reviews from.                                                                                                         |
+| app_id_list          | False    | None    | A list of app IDs to extract reviews from.                                                                                                  |
+| country              | False    | us      | The country code to extract reviews from.                                                                                                   |
+| language             | False    | en      | The language code to extract reviews from.                                                                                                  |
+| start_date           | False    | None    | The date to start extracting reviews from                                                                                                   |
+| stream_maps          | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config    | False    | None    | User-defined config values to be used within map expressions.                                                                               |
+| flattening_enabled   | False    | None    | 'True' to enable schema flattening and automatically expand nested properties.                                                              |
+| flattening_max_depth | False    | None    | The max depth to flatten schemas.                                                                                                           |
+| batch_config         | False    | None    |                                                                                                                                             |
 
 A full list of supported settings and capabilities is available by running: `tap-google-play --about`
 
