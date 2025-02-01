@@ -42,6 +42,14 @@ dependencies = [
 
 scripts.tap-google-play = "tap_google_play.tap:TapGooglePlay.cli"
 
+[dependency-groups]
+dev = [
+  "mypy>=1.11.1",
+  "pytest>=7",
+  "pytest-github-actions-annotate-failures>=0.2",
+  "singer-sdk[testing]",
+]
+
 [tool.hatch.version]
 source = "vcs"
 
@@ -55,7 +63,6 @@ lint.select = [
   "ALL",
 ]
 lint.ignore = [
-  "ANN101", # missing-type-self
   "DJ",     # flake8-django
   "FIX002", # line-contains-todo
 ]
@@ -102,9 +109,4 @@ module = [
 ]
 
 [tool.uv]
-dev-dependencies = [
-  "mypy>=1.11.1",
-  "pytest>=7",
-  "singer-sdk[testing]",
-  "pytest-github-actions-annotate-failures>=0.2.0",
-]
+required-version = ">=0.5.19"
