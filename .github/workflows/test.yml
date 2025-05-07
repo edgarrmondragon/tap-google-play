@@ -67,6 +67,8 @@ jobs:
     - name: Run tests
       env:
         TAP_GOOGLE_PLAY_APP_ID: com.ifountain.opsgenie
+        TAP_GOOGLE_PLAY_COUNTRY: us
+        TAP_GOOGLE_PLAY_LANGUAGE: en
       run: |
         nox --verbose
 
