@@ -39,3 +39,12 @@ repos:
     rev: v4.2.0
     hooks:
       - id: validate_manifest
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.33.0
+    hooks:
+      - id: check-github-workflows
+      - id: check-renovate
+        language: python
+        additional_dependencies:
+          - pyjson5==1.6.9
