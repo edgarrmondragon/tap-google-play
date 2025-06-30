@@ -27,7 +27,7 @@ env:
   FORCE_COLOR: "1"
   PYO3_USE_ABI3_FORWARD_COMPATIBILITY: "1"
   # renovate: datasource=pypi depName=uv
-  UV_VERSION: 0.7.12
+  UV_VERSION: 0.7.13
   # renovate: datasource=pypi depName=nox
   NOX_VERSION: 2025.5.1
 
