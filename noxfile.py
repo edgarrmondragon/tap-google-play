@@ -5,11 +5,11 @@ from __future__ import annotations
 import nox
 
 python_versions = [
+    "3.14",
     "3.13",
     "3.12",
     "3.11",
     "3.10",
-    "3.9",
 ]
 nox.needs_version = ">=2024.4.15"
 nox.options.default_venv_backend = "uv"
