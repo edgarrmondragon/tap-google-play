@@ -44,6 +44,7 @@ scripts.tap-google-play = "tap_google_play.tap:TapGooglePlay.cli"
 [dependency-groups]
 dev = [
   "mypy>=1.11.1",
+  "prek>=0.2.3",
   "pytest>=7",
   "pytest-github-actions-annotate-failures>=0.2",
   "singer-sdk[testing]",

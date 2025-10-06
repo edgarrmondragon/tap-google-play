@@ -13,7 +13,21 @@ python_versions = [
 ]
 nox.needs_version = ">=2024.4.15"
 nox.options.default_venv_backend = "uv"
-nox.options.sessions = ("tests",)
+nox.options.sessions = ("tests", "lint", "mypy")
+
+
+@nox.session
+def lint(session: nox.Session) -> None:
+    """Lint."""
+    session.run(
+        "uv",
+        "run",
+        "--active",
+        "prek",
+        "run",
+        "--all-files",
+        "--show-diff-on-failure",
+    )
 
 
 @nox.session(python=python_versions)
@@ -34,4 +48,4 @@ def tests(session: nox.Session) -> None:
 def mypy(session: nox.Session) -> None:
     """Check types."""
     args = session.posargs or ("tap_google_play",)
-    session.run("uv", "run", "mypy", *args)
+    session.run("uv", "run", "--active", "mypy", *args)
