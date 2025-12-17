@@ -34,6 +34,7 @@ jobs:
         version: ${{ env.UV_VERSION }}
 
     - name: Run lint checks
+      continue-on-error: true
       run: >
         uvx
         --with nox==${{ env.NOX_VERSION }}
