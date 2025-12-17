@@ -1,0 +1,43 @@
+name: autofix.ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: 1
+  # renovate: datasource=pypi depName=uv
+  UV_VERSION: 0.9.13
+  # renovate: datasource=pypi depName=nox
+  NOX_VERSION: 2025.11.12
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+
+    - name: Set up Python
+      uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+
+    - uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # v7.1.4
+      with:
+        version: ${{ env.UV_VERSION }}
+
+    - name: Run lint checks
+      continue-on-error: true
+      run: >
+        uvx
+        --with nox==${{ env.NOX_VERSION }}
+        nox --verbose -s lint
+
+    - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27 # v1.3.2
