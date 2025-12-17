@@ -3,17 +3,23 @@
 # tap-google-play
 
 <div>
-  <a href="https://pypi.org/p/tap-google-play/">
-    <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/tap-google-play">
+  <a href="https://github.com/reservoir-data/tap-google-play/blob/main/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/reservoir-data/tap-google-play"/>
   </a>
-  <a href="https://results.pre-commit.ci/latest/github/edgarrmondragon/tap-google-play/main">
-    <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/edgarrmondragon/tap-google-play/main.svg"/>
+  <a href="https://results.pre-commit.ci/latest/github/reservoir-data/tap-google-play/main">
+    <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/reservoir-data/tap-google-play/main.svg"/>
   </a>
-  <a href="https://github.com/edgarrmondragon/tap-google-play/blob/main/LICENSE">
-    <img alt="License" src="https://img.shields.io/github/license/edgarrmondragon/tap-google-play"/>
+  <a href="https://scientific-python.org/specs/spec-0000/">
+    <img alt="SPEC 0 — Minimum Supported Dependencies" src="https://img.shields.io/badge/SPEC-0-green"/>
   </a>
   <a href="https://github.com/astral-sh/ruff">
-    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;">
+    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;">
+  </a>
+  <a href="https://github.com/astral-sh/uv">
+   <img alt="uv" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json"/>
+  </a>
+  <a href="https://pypi.org/p/tap-google-play/">
+    <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/tap-google-play">
   </a>
   <a href="https://pypi.org/p/tap-google-play/">
     <img alt="Python versions" src="https://img.shields.io/pypi/pyversions/tap-google-play"/>

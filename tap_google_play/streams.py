@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 
-import typing as t
+from typing import TYPE_CHECKING, override
 
 from google_play_scraper import Sort, app, reviews
 from singer_sdk import typing as th
 
 from tap_google_play.client import GooglePlayStream
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
     from singer_sdk.helpers.types import Context
 
 
@@ -35,13 +37,15 @@ class ReviewsStream(GooglePlayStream):
         th.Property("developerId", th.StringType),
     ).to_dict()
 
+    @override
     @property
     def partitions(self) -> list[dict]:
         """Return a list of partitions for the stream."""
         app_ids = self.config.get("app_id_list", [self.config.get("app_id")])
         return [{"appId": app_id} for app_id in app_ids]
 
-    def get_records(self, context: Context | None) -> t.Iterable[dict]:
+    @override
+    def get_records(self, context: Context | None) -> Iterable[dict]:
         """Return a generator of row-type dictionary objects."""
         start_date = self.get_starting_timestamp(context)
         if start_date:
